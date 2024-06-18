@@ -1,0 +1,27 @@
+\XeTeXlinebreaklocale "zh"           % auto newline
+\XeTeXlinebreakskip = 0pt plus 1pt   % flexible spacing
+\setlength{\parskip}{0.1cm}          % break between paragraphs
+
+\usepackage{fancyhdr,everypage}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\lhead{}
+\rhead{\bfseries bridge-cc}
+\lfoot{\today}
+\cfoot{\thepage}
+\rfoot{jc}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%\renewcommand{\thesection}{\Roman{section}}
+\usepackage{titlesec}
+%\titleformat{\section}{\normalfont\Large\bfseries}{Problem~\thesection}{1em}{}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\newlength\tindent
+\setlength{\tindent}{\parindent}
+\setlength{\parindent}{0pt}
+\renewcommand{\indent}{\hspace*{\tindent}}
+

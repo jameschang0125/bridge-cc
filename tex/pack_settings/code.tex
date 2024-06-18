@@ -1,0 +1,40 @@
+\usepackage[ruled,vlined]{algorithm2e}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+\SetCommentSty{mycommfont}
+\newcommand\spcodefont[1]{\ttfamily\textcolor{fakeblack}{#1}}
+\SetFuncArgSty{spcodefont}
+
+\usepackage{listings}
+\usepackage{caption}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+
+\lstset{
+language=python,
+backgroundcolor=\color{backcolour},
+basicstyle=\small\ttfamily, % \color{deeptblue}
+%keywordstyle=\color{magenta},
+commentstyle=\color{magenta},
+xleftmargin=5pt,
+frame=tb,
+framexleftmargin=5pt,
+breaklines = true,
+breakatwhitespace=false,         
+breaklines=true,                 
+captionpos=b,                    
+keepspaces=true,                 
+showspaces=false,                
+showstringspaces=false,
+showtabs=false,                  
+tabsize=3,
+escapeinside={<@}{@>},
+mathescape,
+literate={->}{{$\rightarrow$}}{2}
+         {*}{{$^*$}}{1}
+         {Xo}{{\textbf{X}$^\circ$}}{2}
+}
+\renewcommand*\thelstnumber{\arabic{lstnumber}:}
+\DeclareCaptionFormat{mylst}{\hrule#1#2#3}
+\captionsetup[lstlisting]{format=mylst,labelfont=bf,singlelinecheck=off,labelsep=space}
+
+

@@ -1,0 +1,117 @@
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+
+% package for symbols
+\usepackage{stmaryrd}
+\usepackage{halloweenmath}
+\usepackage{wasysym}
+\usepackage{ccicons}
+\usepackage{fge}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{
+  colorlinks,
+  citecolor=violet,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
+\usepackage[most]{tcolorbox}
+\newtcbtheorem{Theorem}{Theorem}{
+  enhanced,
+  sharp corners,
+  attach boxed title to top left={
+    yshifttext=-1mm
+  },
+  colback=white,
+  colframe=blue!75!black,
+  fonttitle=\bfseries,
+  boxed title style={
+    sharp corners,
+    size=small,
+    colback=blue!75!black,
+    colframe=blue!75!black,
+  } 
+}{thm}
+\newtcbtheorem{Problem}{Problem}{
+  enhanced,
+  sharp corners,
+  attach boxed title to top left={
+    yshifttext=-1mm
+  },
+  colback=white,
+  colframe=blue!25,
+  fonttitle=\bfseries,
+  coltitle=black,
+  boxed title style={
+    sharp corners,
+    size=small,
+    colback=blue!25,
+    colframe=blue!25,
+  } 
+}{prob}
+
+%=======cool theorem box tutorial=======%
+\begin{comment}
+\begin{Theorem}{}{fermat}
+  No three positive integers \(a\), \(b\) and \(c\) satisfy the equation \(a^{n}
+  + b^{n} = c^{n}\) for any integer greater than or equal to two.
+\end{Theorem}
+\end{comment}
+
+\begin{comment}
+\begin{Problem}{A slightly difficult problem*}{}~
+\begin{center}
+\includegraphics[height=40mm]{lieb.png}
+%\caption{this is caption}
+\label{lieb}
+\end{center}
+Try to perform the measures above.
+\end{Problem}
+\end{comment}
+
+
+
+
+
+
+
+
+
+
+
+
+
+% defines
+\DeclareMathOperator*{\argmax}{arg\!\max}
+\DeclareMathOperator*{\argmin}{arg\!\min}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{{\left\lVert#1\right\rVert}}
+\newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+\newcommand{\abs}[1]{{\left|#1\right|}}
+\theoremstyle{definition}
+\newtheorem{answer}{}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}
+
+
+
