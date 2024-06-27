@@ -10,11 +10,23 @@ cd ..
 cp -r tex tex-tmp
 cp -r tex-book tex-tmp
 cd tex-tmp
+mkdir log
 cd tex-book
 for f in *.tex; do
-	xelatex $f
-	xelatex $f
+	echo
+	echo ===== compiling $f =====
+	time xelatex -halt-on-error $f > ../log/$f.log1
+	if (( $? )); then
+		echo error when compiling $f, exiting...
+		exit
+	fi
+	time xelatex -halt-on-error $f > ../log/$f.log2
+	if (( $? )); then
+		echo error when compiling $f, exiting...
+		exit
+	fi
 done
 cd ../..
-mkdir tex-result
+mkdir -p tex-result
 cp tex-tmp/tex-book/*.pdf tex-result
+echo "compile done"

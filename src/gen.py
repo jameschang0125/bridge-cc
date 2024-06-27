@@ -20,14 +20,15 @@ CHAPTER_ORDER = [
 	"util"
 ]
 
-def _gen(fnames = [], cname = "tmp"):
-	cname = cname + ".tex"
+def _gen(fnames = [], chapter = "tmp"):
+	cname = chapter + ".tex"
 	with open("../tex/template.tex", "r") as fd:
 		template = [l.strip() for l in fd.readlines()]
 	
 	output = []
 	for t in template:
 		if t == "%%% include":
+			output += __chapter(chapter)
 			output += __include(fnames)
 		else:
 			output.append(t)
