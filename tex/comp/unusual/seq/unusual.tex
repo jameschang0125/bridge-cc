@@ -1,5 +1,23 @@
 # if we are able to overcall the higher suit at 1-level, then range = 3-10 or 16+; otherwise 10+
-(1M) - 2M*: 5+oM, 5+m 
+(1M) - 2M*: 5+oM, 5+m
+          - 3C*: P/C
+          - 2N*: ask
+               - 3m : 5+m, lo
+               - 3H*: 5+C, hi
+               - 3S*: 5+D, hi
+          - 3X : nat s/o
 (1M) - 2N*: 55+ms
 (1m) - 2m*: 55+Ms; 54+ if NV/V 
 (1m) - 2N*: 5+H, 5+om
+# NV/V
+(1m) - 2m*- 2N*: ask
+               - 3C*: min
+                    - 3D*: ask
+                         - 3H*: 5+S
+                         - 3S*: 5+H
+                    - 3H*: P/C
+               - 3D*: min, 55Ms
+               - 3H*: max, 5+S
+               - 3S*: max, 5+H
+               - 3N*: max, 55Ms
+               - 4m : 16+, shortness in om
