@@ -1,13 +1,23 @@
-# TODO
+# in progress
 
 - 2NT in comp. (Leb. etc.)
-- (1X) - X - jump 2M - ...
-- 2S - 
-- against multi
 - against CAPP, DONT etc
-- Gazzilli [almost done]
-- 1C-2C-3N exclude 18-19
+
+# TODO
+
+- comp after pre
+- against multi
+- Rubens
+- (1X) - X - jump 2M - ...
 
 # not urgent
 
 - 2C opening resp.
+- comp in every situation individually
+- 1H - (X) ?
+
+# done
+
+- 2S - 
+- Gazzilli [almost done]
+- 1C-2C-3N exclude 18-19

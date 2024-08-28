@@ -15,12 +15,12 @@ cd tex-book
 for f in *.tex; do
 	echo
 	echo ===== compiling $f =====
-	time xelatex -halt-on-error $f > ../log/$f.log1
+	time xelatex --halt-on-error $f > ../log/$f.log1
 	if (( $? )); then
 		echo error when compiling $f, exiting...
 		exit
 	fi
-	time xelatex -halt-on-error $f > ../log/$f.log2
+	time xelatex --halt-on-error $f > ../log/$f.log2
 	if (( $? )); then
 		echo error when compiling $f, exiting...
 		exit
