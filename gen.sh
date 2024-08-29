@@ -25,6 +25,11 @@ for f in *.tex; do
 		echo error when compiling $f, exiting...
 		exit
 	fi
+	time xelatex --halt-on-error $f > ../log/$f.log2
+	if (( $? )); then
+		echo error when compiling $f, exiting...
+		exit
+	fi
 done
 cd ../..
 mkdir -p tex-result
