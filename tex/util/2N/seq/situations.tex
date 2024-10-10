@@ -3,12 +3,12 @@
  1X -(2Y)- 2N : nat
  1N -(2X)- 2N : tr. Leb
 (2C)- X* -(P) - 2N : nat
-(2X)- X* -(P) - 2N : tr. Leb
+(2X)- X* -(P) - 2N : Leb
 (1C)- X* -(2C)- 2N : nat
-(1X)- X* -(2X)- 2N : tr. Leb 
+(1X)- X* -(2X)- 2N : Leb 
 (1X)- 1Y -(B) - 2N : nat
 (1Y)- 2m -(B) - 2N : nat
-(1S)- 2H -(2S)- 2N*->3C # 3X->3[X+1]
+(1S)- 2H -(2S)- 2N*->3C # 3X->3[X+1] (tr. Leb)
  1X -(2M)- X* -(P) - 2N : good-bad
  1X -(1Y)- X/B-(2Y)- 2N : good-bad
  1X -(1Y)- X/B-(2Z)- 2N : good-bad 
@@ -16,8 +16,8 @@
  1Y -(2X)- X/B-(P) - 2N : good-bad
  1Y -(2X)- P  -(P) - 2N : t/o, usually 64+mms
  1Y -(B) - P  -(2X)- 2N : t/o, usually 64+mms
-(2M)- P  -(P) - X* -(P) - 2N : tr. Leb
-(1X)- P  -(2X)- X* -(P) - 2N : tr. Leb
+(2M)- P  -(P) - X* -(P) - 2N : Leb
+(1X)- P  -(2X)- X* -(P) - 2N : Leb
 (1X)- X* -(B) - X* -(P) - 2N : normal Leb (good-bad)
 (1X)- 1Y -(B) - X* -(P) - 2N : normal Leb (good-bad)
 (1Y)- 2X -(B) - X* -(P) - 2N : normal Leb (good-bad)
@@ -25,6 +25,8 @@
 (1X)- 1N -(2X)- X* -(P) - 2N : min nat
 
 # general rules for other situations: 
+# tr. Leb applies only after 1N - (2X) and (1S)- 2H -(2S)
 # ... X* -(P) - 2N = usually normal Leb (good-bad)
 # ... X* -(B) - 2N = normal Leb (good-bad) if X = neg or t/o
-# free bid 2N is nat if inv is possible; otherwise t/o
+# otherwise, free bid 2N is nat if inv is possible; otherwise t/o
+# if there is not possible for inv+ (ex: balancing X by 1N opener), then 2N = nat
