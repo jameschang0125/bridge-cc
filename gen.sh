@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rm -r tex-tmp
 if test -d tex-tmp; then
 	echo "exited since tex-tmp exists"
@@ -15,17 +17,17 @@ cd tex-book
 for f in *.tex; do
 	echo
 	echo ===== compiling $f =====
-	time xelatex --halt-on-error $f > ../log/$f.log1
+	echo X | time xelatex --halt-on-error $f > ../log/$f.log1
 	if (( $? )); then
 		echo error when compiling $f, exiting...
 		exit
 	fi
-	time xelatex --halt-on-error $f > ../log/$f.log2
+	echo X | time xelatex --halt-on-error $f > ../log/$f.log2
 	if (( $? )); then
 		echo error when compiling $f, exiting...
 		exit
 	fi
-	time xelatex --halt-on-error $f > ../log/$f.log3
+	echo X | time xelatex --halt-on-error $f > ../log/$f.log3
 	if (( $? )); then
 		echo error when compiling $f, exiting...
 		exit
