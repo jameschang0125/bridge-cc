@@ -14,10 +14,12 @@ IGNORE_DIR = {
 }
 OUTPUT_DIR = "../tex-book"
 CHAPTER_ORDER = [
-	"1X",
-	"pre",
-	"comp",
-	"util"
+	"intro",
+	"opening",
+	"overcall",
+	"conventions",
+    "principles",
+    "cardplay"
 ]
 
 def _gen(fnames = [], chapter = "tmp"):
