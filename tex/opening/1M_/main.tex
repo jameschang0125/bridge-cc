@@ -1,22 +1,38 @@
 \section{1M}
 
+We play Kaplan-interchange after \texttt{1H} (\texttt{1S} shows \texttt{4-S} and non-GF values, while \texttt{1N} shows \texttt{5+S}) to cope with the rebid problem.
+This should be a clear winning move against natrual system, with the cost of memorization. 
+Therefore, I tried my best to reduce the complexity for subsequent auctions, hope that it helps.
+This is a list of major tweaks:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item Kaplan-interchange: \texttt{1S} shows \texttt{4-S} and non-GF values, while \texttt{1N} shows \texttt{5+S}
+    \item one exception above is that inv with 6S will bid \texttt{1S} initially, then rebid 2S regardless of opener's rebid. As a consequence (and similar to \texttt{1C - 2D = inv}), a jump rebid is GF after \texttt{1H - 1N}.
+    \item rebid \texttt{2C} always shows Gazzilli. (we use 6+M as the weak variant)
+    \item because of Gazzilli, jumps, reverses, and \texttt{2N} rebid shows a distributional hand.
+    \item \texttt{1H - 1S - 1N} shows a balanced hand or 4S, partner can inquiry with \texttt{2C}.
+    \item jump oM is limit raise.
+\end{itemize}
+
 \bin{\currfiledir/seq/resp}
 
 \subsection{rebid}
 
 \bin{\currfiledir/seq/1M-1SN}
 
-There are some differences here:
+Some differences are made over Kaplan-interchange:
 \bin{\currfiledir/seq/1H-1SN}
 
 \subsection{after Gazzilli accepted}
 
 % This is an optional semi-relay aim to distinguish 16-18 and 19-21. You may simply use a more natural approach (ex: 2oM = 3+oM) instead.
-\bin{\currfiledir/seq/Gaz}
+% \bin{\currfiledir/seq/Gaz}
+(TODO)
 
 \subsection{1M - 2N}
 
-\bin{\currfiledir/seq/1M-2N}
+(TODO)
+% \bin{\currfiledir/seq/1M-2N}
 
 \subsection{2/1}
 
