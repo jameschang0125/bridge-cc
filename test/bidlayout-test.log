@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  6 SEP 2025 15:34
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  6 SEP 2025 15:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**test/bidlayout-test.tex
-(./test/bidlayout-test.tex
+**bidlayout-test.tex
+(./bidlayout-test.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -128,8 +128,9 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 \bidLeftWidth=\skip51
 \bidRightWidth=\skip52
+\c@bidNeed=\count272
 
-(test/bidlayout-test.aux)
+(./bidlayout-test.aux)
 \openout1 = `bidlayout-test.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
@@ -220,27 +221,23 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 76.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <9> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 79.
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 96.
 
 
 [1
 
-]
-
-[2] (test/bidlayout-test.aux)
+] (./bidlayout-test.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2210 strings out of 473832
- 35573 string characters out of 5729482
- 431438 words of memory out of 5000000
- 25280 multiletter control sequences out of 15000+600000
- 586105 words of font info for 56 fonts, out of 8000000 for 9000
+ 2199 strings out of 473832
+ 35319 string characters out of 5729482
+ 428654 words of memory out of 5000000
+ 25270 multiletter control sequences out of 15000+600000
+ 579790 words of font info for 53 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 64i,9n,79p,224b,346s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 64i,9n,79p,219b,346s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on test/bidlayout-test.pdf (2 pages).
+Output written on bidlayout-test.pdf (1 page).

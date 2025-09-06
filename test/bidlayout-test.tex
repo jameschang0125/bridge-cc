@@ -26,19 +26,31 @@
 \newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.40\linewidth}
 \newlength{\bidRightWidth}\setlength{\bidRightWidth}{.60\linewidth}
 
+% Initialize global variables and counter
+\newcounter{bidNeed}
+\setcounter{bidNeed}{0}
+\gdef\bidLabel{}\gdef\bidDesc{}
+
 % bidsemi: use plain "\bid{A}[desc]" and "\subbid{<text>}[extra]"
 \NewDocumentCommand{\bid}{m o}{%
-  \gdef\bidLabel{#1}\gdef\bidNeed{1}%
+  \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
   \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
 }
 \NewDocumentCommand{\subbid}{m o}{%
-  \ifnum\bidNeed=1\relax
+  \ifnum\value{bidNeed}=1\relax
     \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}}}%
-    \gdef\bidNeed{0}%
+    \setcounter{bidNeed}{0}%
   \else
     \def\bidLeftCell{}%
   \fi
   \bidLeftCell & {\ttfamily\small {\color{subbidTextColor}#1}\IfValueT{#2}{{\ \texttt{\color{subbidExtraColor}\small #2}}}}\tabularnewline
+}
+% Command to output standalone bids (bids without subbids)
+\NewDocumentCommand{\flushbid}{}{%
+  \ifnum\value{bidNeed}=1\relax
+    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \tabularnewline
+    \setcounter{bidNeed}{0}%
+  \fi
 }
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
@@ -46,9 +58,15 @@
 }
 \newenvironment{bidsemi}{%
   \par\ttfamily\small\parskip=0pt\parindent=0pt%
-  \gdef\bidNeed{0}\gdef\bidLabel{}\gdef\bidDesc{}%
+  \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
   \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.8em}}p{\bidRightWidth}@{}}%
-}{\end{tabular}\par}
+}{%
+  \ifnum\value{bidNeed}=1\relax
+    % Output any pending bid at the end
+    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \\
+  \fi
+  \end{tabular}\par%
+}
 
 % (intentionally left minimal; removed unused list/collapsible helpers)
 
@@ -68,64 +86,10 @@
 \subbid{C2}[detail]
 \subsubbid{X}[Y]
 \bid{D}
+\flushbid
 \bid{E}
 \subbid{E1}
 \end{bidsemi}
-
-\section*{Color showcase}
-\subsection*{Blue Accent}
-\noindent
-\texttt{\bfseries {\color{blue!70!black}Bid Label}}\ {\texttt{\color{blue!45}\small\ Desc}}\par
-\texttt{\small {\color{black!90}Subbid Text}\ {\color{blue!45!black!50}Extra}}\par
-\texttt{\small {\color{blue!60!black}Subsub X}\ {\color{blue!30!black}Subsub Y}}\par
-
-\subsection*{Red Accent}
-\noindent
-\texttt{\bfseries {\color{red!70!black}Bid Label}}\ {\texttt{\color{red!45}\small\ Desc}}\par
-\texttt{\small {\color{black!90}Subbid Text}\ {\color{red!45!black!50}Extra}}\par
-\texttt{\small {\color{red!60!black}Subsub X}\ {\color{red!30!black}Subsub Y}}\par
-
-\subsection*{Teal + Orange + Slate}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{0D9488}{Bid Label}}}\ {\texttt{\textcolor[HTML]{34D399}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{1F2937}{Subbid Text}}\ {\textcolor[HTML]{F59E0B}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{2563EB}{Subsub X}}\ {\textcolor[HTML]{64748B}{Subsub Y}}}\par
-
-\subsection*{Purple + Lime + Charcoal}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{7C3AED}{Bid Label}}}\ {\texttt{\textcolor[HTML]{A78BFA}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{2D2A32}{Subbid Text}}\ {\textcolor[HTML]{84CC16}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{9333EA}{Subsub X}}\ {\textcolor[HTML]{A3A3A3}{Subsub Y}}}\par
-
-\subsection*{Indigo + Amber + Warm Grey}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{4F46E5}{Bid Label}}}\ {\texttt{\textcolor[HTML]{F59E0B}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{3F3F46}{Subbid Text}}\ {\textcolor[HTML]{FBBF24}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{3730A3}{Subsub X}}\ {\textcolor[HTML]{A8A29E}{Subsub Y}}}\par
-
-\subsection*{Cyan + Raspberry + Graphite}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{06B6D4}{Bid Label}}}\ {\texttt{\textcolor[HTML]{22D3EE}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{1F2937}{Subbid Text}}\ {\textcolor[HTML]{D946EF}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{0891B2}{Subsub X}}\ {\textcolor[HTML]{374151}{Subsub Y}}}\par
-
-\subsection*{Magenta + Emerald + Crimson}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{A855F7}{Bid Label}}}\ {\texttt{\textcolor[HTML]{34D399}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{374151}{Subbid Text}}\ {\textcolor[HTML]{F43F5E}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{EC4899}{Subsub X}}\ {\textcolor[HTML]{F5D0FE}{Subsub Y}}}\par
-
-\subsection*{My favorite}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{7C3AED}{Bid Label}}}\ {\texttt{\textcolor[HTML]{A78BFA}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{0D9488}{Subbid Text}}\ {\textcolor[HTML]{34D399}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{06B6D4}{Subsub X}}\ {\textcolor[HTML]{22D3EE}{Subsub Y}}}\par
-
-\subsection*{My favorite 2}
-\noindent
-\texttt{\bfseries {\textcolor[HTML]{7C3AED}{Bid Label}}}\ {\texttt{\textcolor[HTML]{A25DD0}{\small\ Desc}}}\par
-\texttt{\small {\textcolor[HTML]{085D53}{Subbid Text}}\ {\textcolor[HTML]{34D399}{Extra}}}\par
-\texttt{\small {\textcolor[HTML]{59709C}{Subsub X}}\ {\textcolor[HTML]{22D3EE}{Subsub Y}}}\par
 
 \end{document}
 
