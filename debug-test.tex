@@ -1,27 +1,15 @@
-\newcommand\bin[1]{
-\lstinputlisting[label={#1}]{#1}
-}
-
-% trimmed unused packages
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
 \usepackage{xparse}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 
-% (intentionally left minimal; removed older unused demo commands)
-
 % Color theme — My favorite 2
 \definecolor{Fav2BidLabel}{HTML}{7C3AED}
 \definecolor{Fav2BidDesc}{HTML}{A25DD0}
-\definecolor{Fav2SubText}{HTML}{59709C}
-\definecolor{Fav2SubExtra}{HTML}{23A0ED}
-\definecolor{Fav2SubsubX}{HTML}{085D53}
-\definecolor{Fav2SubsubY}{HTML}{34D399}
 \colorlet{bidLabelColor}{Fav2BidLabel}
 \colorlet{bidDescColor}{Fav2BidDesc}
-\colorlet{subbidTextColor}{Fav2SubText}
-\colorlet{subbidExtraColor}{Fav2SubExtra}
-\colorlet{subsubXColor}{Fav2SubsubX}
-\colorlet{subsubYColor}{Fav2SubsubY}
 
 % Fixed-width columns for alignment
 \newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.40\linewidth}
@@ -32,20 +20,12 @@
 \setcounter{bidNeed}{0}
 \gdef\bidLabel{}\gdef\bidDesc{}
 
-% bidsemi: use plain "\bid{A}[desc]" and "\subbid{<text>}[extra]"
+% Simple bid command
 \NewDocumentCommand{\bid}{m o}{%
   \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
   \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
 }
-\NewDocumentCommand{\subbid}{m o}{%
-  \ifnum\value{bidNeed}=1\relax
-    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}}}%
-    \setcounter{bidNeed}{0}%
-  \else
-    \def\bidLeftCell{}%
-  \fi
-  \bidLeftCell & {\ttfamily\small {\color{subbidTextColor}#1}\IfValueT{#2}{{\ \texttt{\color{subbidExtraColor}\small #2}}}}\tabularnewline
-}
+
 % Command to output standalone bids (bids without subbids)
 \NewDocumentCommand{\flushbid}{}{%
   \ifnum\value{bidNeed}=1\relax
@@ -53,10 +33,7 @@
     \setcounter{bidNeed}{0}%
   \fi
 }
-% Sub-item under right column with indentation; X dark grey, Y light grey
-\NewDocumentCommand{\subsubbid}{m o}{%
-  {} & {\ttfamily\small \hspace*{1.2em}{\color{subsubXColor}#1}\IfValueT{#2}{{\ \texttt{\color{subsubYColor}\small #2}}}}\tabularnewline
-}
+
 \newenvironment{bidsemi}{%
   \par\ttfamily\small\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
@@ -68,3 +45,14 @@
   \fi
   \end{tabular}\par%
 }
+
+\begin{document}
+
+\section*{Debug Test}
+
+\begin{bidsemi}
+\bid{D}
+\flushbid
+\end{bidsemi}
+
+\end{document}
