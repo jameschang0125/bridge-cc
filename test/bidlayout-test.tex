@@ -5,6 +5,7 @@
 \usepackage{xparse}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
+\usepackage{colortbl}
 
 % (intentionally left minimal; removed older unused demo commands)
 
@@ -21,11 +22,22 @@
 \colorlet{subbidExtraColor}{Fav2SubExtra}
 \colorlet{subsubXColor}{Fav2SubsubX}
 \colorlet{subsubYColor}{Fav2SubsubY}
+% removed unused GroupTint* definitions for conciseness
+
+% palette for subtle group backgrounds tuned for text colors
+\definecolor{GroupBGOne}{HTML}{FFDDB8}
+\definecolor{GroupBGTwo}{HTML}{FFF1BF}
+\definecolor{GroupBGThree}{HTML}{FFE4E6}
+
+\newcounter{bidGroupIndex}
+\setcounter{bidGroupIndex}{0}
+\gdef\bidGroupFillSpec{GroupBGOne}
 
 % Fixed-width columns for alignment
 \newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.66\linewidth}
 \newlength{\bidRightWidth}\setlength{\bidRightWidth}{.66\linewidth}
 \newcommand{\BidRowStretch}{0.5}
+% removed bidRowStrut
 
 % Initialize global variables and counter
 \newcounter{bidNeed}
@@ -36,6 +48,11 @@
 \NewDocumentCommand{\bid}{m o}{%
   \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
   \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
+  \stepcounter{bidGroupIndex}%
+  \ifnum\value{bidGroupIndex}>3\setcounter{bidGroupIndex}{1}\fi
+  \ifnum\value{bidGroupIndex}=1\gdef\bidGroupFillSpec{GroupBGOne}\fi
+  \ifnum\value{bidGroupIndex}=2\gdef\bidGroupFillSpec{GroupBGTwo}\fi
+  \ifnum\value{bidGroupIndex}=3\gdef\bidGroupFillSpec{GroupBGThree}\fi
 }
 \NewDocumentCommand{\subbid}{m o}{%
   \ifnum\value{bidNeed}=1\relax
@@ -48,15 +65,15 @@
   \else
     \def\bidLeftCell{}%
   \fi
-  \bidLeftCell & {\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
+  {\cellcolor{\bidGroupFillSpec}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
 }
 % Command to output standalone bids (bids without subbids)
 \NewDocumentCommand{\flushbid}{}{%
   \ifnum\value{bidNeed}=1\relax
     \ifx\bidDesc\empty
-      {\color{bidLabelColor}\texttt{\bfseries \bidLabel}} & \tabularnewline
+      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
     \else
-      {\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}} & \tabularnewline
+      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
     \fi
     \setcounter{bidNeed}{0}%
   \fi
@@ -73,7 +90,7 @@
 \else
   \def\bidLeftCell{}%
 \fi
-\bidLeftCell & {\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
+{\cellcolor{\bidGroupFillSpec}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
@@ -84,9 +101,9 @@
 }{%
   \ifnum\value{bidNeed}=1\relax
     \ifx\bidDesc\empty
-      {\color{bidLabelColor}\texttt{\bfseries \bidLabel}} & \\
+      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
     \else
-      {\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}} & \\
+      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
     \fi
   \fi
   \end{tabular}\par\endgroup%
