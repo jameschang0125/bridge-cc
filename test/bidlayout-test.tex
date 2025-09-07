@@ -39,33 +39,55 @@
 }
 \NewDocumentCommand{\subbid}{m o}{%
   \ifnum\value{bidNeed}=1\relax
-    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}}}%
+    \ifx\bidDesc\empty
+      \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+    \else
+      \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}}%
+    \fi
     \setcounter{bidNeed}{0}%
   \else
     \def\bidLeftCell{}%
   \fi
-  \bidLeftCell & {\ttfamily\small {\color{subbidTextColor}#1}\IfValueT{#2}{{\ \texttt{\color{subbidExtraColor}\small #2}}}}\tabularnewline
+  \bidLeftCell & {\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
 }
 % Command to output standalone bids (bids without subbids)
 \NewDocumentCommand{\flushbid}{}{%
   \ifnum\value{bidNeed}=1\relax
-    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \tabularnewline
+    \ifx\bidDesc\empty
+      {\color{bidLabelColor}\texttt{\bfseries \bidLabel}} & \tabularnewline
+    \else
+      {\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}} & \tabularnewline
+    \fi
     \setcounter{bidNeed}{0}%
   \fi
 }
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
-  {} & {\ttfamily\small \hspace*{1.2em}{\color{subsubXColor}#1}\IfValueT{#2}{{\ \texttt{\color{subsubYColor}\small #2}}}}\tabularnewline
+\ifnum\value{bidNeed}=1\relax
+  \ifx\bidDesc\empty
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+  \else
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}}%
+  \fi
+  \setcounter{bidNeed}{0}%
+\else
+  \def\bidLeftCell{}%
+\fi
+\bidLeftCell & {\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
-  \par\ttfamily\small\parskip=0pt\parindent=0pt%
+  \par\ttfamily\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
   \renewcommand{\arraystretch}{\BidRowStretch}%
   \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
 }{%
   \ifnum\value{bidNeed}=1\relax
-    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \\
+    \ifx\bidDesc\empty
+      {\color{bidLabelColor}\texttt{\bfseries \bidLabel}} & \\
+    \else
+      {\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}} & \\
+    \fi
   \fi
   \end{tabular}\par\endgroup%
 }
@@ -82,6 +104,7 @@
 \subbid{A3}
 \bid{B}[desc B]
 \subbid{B1}[this is a very very looooooooooong extra text hahahahhahahaha]
+\subsubbid{X}[Y]
 \subbid{B2}
 \bid{C}
 \subbid{C1}
