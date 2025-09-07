@@ -9,6 +9,7 @@
 \usepackage{nicematrix}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
+\usepackage[most]{tcolorbox}
 \makeatletter
 % (intentionally left minimal; removed older unused demo commands)
 
@@ -79,19 +80,15 @@
   \else
     \def\bidLeftCell{}%
   \fi
-  % advance row and append shading command for this row
-  \AddShadeForCurrentRow
-  {\cellcolor{NeutralBG}\bidLeftCell} & {\cellcolor{NeutralBG}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
+  {\cellcolor{NeutralBG}\bidLeftCell} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}}\tabularnewline
 }
 % Command to output standalone bids (bids without subbids)
 \NewDocumentCommand{\flushbid}{}{%
   \ifnum\value{bidNeed}=1\relax
-    % advance row and append shading for this pending row
-    \AddShadeForCurrentRow
     \ifx\bidDesc\empty
-      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{NeutralBG}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\strut}}\\
     \else
-      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{NeutralBG}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\strut}}\\
     \fi
     \setcounter{bidNeed}{0}%
   \fi
@@ -108,36 +105,22 @@
 \else
   \def\bidLeftCell{}%
 \fi
-% advance row and append shading for this row
-\AddShadeForCurrentRow
-{\cellcolor{NeutralBG}\bidLeftCell} & {\cellcolor{NeutralBG}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
+{\cellcolor{NeutralBG}\bidLeftCell} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
   \par\ttfamily\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
-  \setcounter{rowIndex}{0}\gdef\shadeCommands{}%
   \renewcommand{\arraystretch}{\BidRowStretch}%
   \begin{NiceTabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}[corners]%
 }{%
   \ifnum\value{bidNeed}=1\relax
-    % advance row and append shading for final pending row
-    \AddShadeForCurrentRow
     \ifx\bidDesc\empty
-      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{NeutralBG}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\strut}}\\
     \else
-      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{NeutralBG}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\tcbox[colback=NeutralBG,enhanced,frame hidden,boxrule=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,nobeforeafter,width=\linewidth,interior style={left color=NeutralBG,right color=\bidGroupFillSpec}]{\strut}}\\
     \fi
   \fi
-  \CodeAfter
-    % Define drawer now (after table is laid out) and then execute accumulated calls
-    \renewcommand{\ShRight}[2]{%
-      \begin{tikzpicture}[overlay, remember picture]
-        \path[shade, left color=NeutralBG, right color=##2]
-          (##1-2.north west) rectangle (##1-2.south east);
-      \end{tikzpicture}%
-    }%
-    \shadeCommands
   \end{NiceTabular}\par\endgroup%
 }
 
@@ -164,11 +147,6 @@
 \bid{E}
 \subbid{E1}
 \end{bidsemi}
-
-{\par\small\ttfamily
-  \edef\ShadeDbg{\shadeCommands}%
-  \noindent Debug shadeCommands: \detokenize\expandafter{\ShadeDbg}\par
-}
 
 \end{document}
 

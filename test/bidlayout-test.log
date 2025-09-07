@@ -1,8 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  7 SEP 2025 17:40
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  7 SEP 2025 19:51
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**bidlayout-test.tex --halt-on-error
+**bidlayout-test.tex
 (./bidlayout-test.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -597,30 +598,176 @@ File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgf@layerbox@background=\box68
 \pgf@layerboxsaved@background=\box69
 )
-\c@bidGroupIndex=\count336
-\c@rowIndex=\count337
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2024/10/22 version 6.4.1 text color boxes
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks38
+\verbatim@line=\toks39
+\verbatim@in@stream=\read3
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count336
+)
+\tcb@titlebox=\box70
+\tcb@upperbox=\box71
+\tcb@lowerbox=\box72
+\tcb@phantombox=\box73
+\c@tcbbreakpart=\count337
+\c@tcblayer=\count338
+\c@tcolorbox@number=\count339
+\l__tcobox_tmpa_box=\box74
+\l__tcobox_tmpa_dim=\dimen314
+\tcb@temp=\box75
+\tcb@temp=\box76
+\tcb@temp=\box77
+\tcb@temp=\box78
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.4.1'
+\c@tcbrastercolumn=\count340
+\c@tcbrasterrow=\count341
+\c@tcbrasternum=\count342
+\c@tcbraster=\count343
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.4.1'
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+Package: tikzfill.image 2023/08/08 v1.0.1 Image filling library for TikZ
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty
+Package: tikzfill-common 2023/08/08 v1.0.1 Auxiliary code for tikzfill
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.co
+de.tex
+File: tikzlibraryfill.image.code.tex 2023/08/08 v1.0.1 Image filling library
+\l__tikzfill_img_box=\box79
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.4.1'
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.4.1'
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pdfcol/pdfcol.sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdfcol Info: Interface disabled because of missing PDF mode of pdfTeX.
+)
+Package pdfcol Info: pdfTeX's color stacks are not available.
+\tcb@testbox=\box80
+\tcb@totalupperbox=\box81
+\tcb@totallowerbox=\box82
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbhooks.code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.4.1'
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.4.1'
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.4.1'
+\tcbfitdim=\dimen315
+\tcb@lowerfitdim=\dimen316
+\tcb@upperfitdim=\dimen317
+\tcb@cur@hbadness=\count344
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcblistingsutf8.code.te
+x
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.4.1'
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.4.1'
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count345
+\lst@gtempboxa=\box83
+\lst@token=\toks40
+\lst@length=\count346
+\lst@currlwidth=\dimen318
+\lst@column=\count347
+\lst@pos=\count348
+\lst@lostspace=\dimen319
+\lst@width=\dimen320
+\lst@newlines=\count349
+\lst@lineno=\count350
+\lst@maxwidth=\dimen321
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count351
+\lst@skipnumbers=\count352
+\lst@framebox=\box84
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.te
+x
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.4.1'
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.4.1'
+)
+\c@tcblisting=\count353
+))
+Package tcolorbox Info: Library `listingsutf8' is compatible with pdftex only. 
+Library `listings` is loaded instead. on input line 29.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbexternal.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.4.1'
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbmagazine.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.4.1'
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbvignette.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.4.1'
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings
+.code.tex
+File: pgflibraryfadings.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.4.1'
+))
+\c@bidGroupIndex=\count354
+\c@rowIndex=\count355
 \bidLeftWidth=\skip57
 \bidRightWidth=\skip58
-\c@bidNeed=\count338
+\c@bidNeed=\count356
  (./bidlayout-test.aux)
 \openout1 = `bidlayout-test.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -656,73 +803,74 @@ LaTeX Font Info:    ... okay on input line 146.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c__nicematrix_shift_Ldots_last_row_dim=\dimen314
-\c__nicematrix_shift_exterior_Vdots_dim=\dimen315
-\c__nicematrix_innersep_middle_dim=\dimen316
+\c__nicematrix_shift_Ldots_last_row_dim=\dimen322
+\c__nicematrix_shift_exterior_Vdots_dim=\dimen323
+\c__nicematrix_innersep_middle_dim=\dimen324
+\c@lstlisting=\count357
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-49.
+32.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-\g__nicematrix_max_cell_width_dim=\dimen317
-\c@iRow=\count339
-\c@jCol=\count340
+\g__nicematrix_max_cell_width_dim=\dimen325
+\c@iRow=\count358
+\c@jCol=\count359
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-50.
+33.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-50.
+33.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-150.
+133.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-150.
+133.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 150.
+(Font)              <10> on input line 133.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 150.
+(Font)              <7> on input line 133.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 150.
-\l__nicematrix_cell_box=\box70
-\l__nicematrix_the_array_box=\box71
-\l__nicematrix_left_delim_dim=\dimen318
-\l__nicematrix_right_delim_dim=\dimen319
+(Font)              <5> on input line 133.
+\l__nicematrix_cell_box=\box85
+\l__nicematrix_the_array_box=\box86
+\l__nicematrix_left_delim_dim=\dimen326
+\l__nicematrix_right_delim_dim=\dimen327
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 152.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 135.
 
-Underfull \hbox (badness 10000) in paragraph at lines 155--155
-[]|\T1/lmtt/m/n/10 B1[][]:[] []this is a very very looooooooooong
+Overfull \hbox (113.54774pt too wide) in paragraph at lines 138--138
+[]|[]| 
  []
 
-\g__nicematrix_ddots_int=\count341
-\g__nicematrix_iddots_int=\count342
-\g__nicematrix_delta_x_one_dim=\dimen320
-\g__nicematrix_delta_y_one_dim=\dimen321
-\g__nicematrix_delta_x_two_dim=\dimen322
-\g__nicematrix_delta_y_two_dim=\dimen323
-\l__nicematrix_initial_i_int=\count343
-\l__nicematrix_initial_j_int=\count344
-\l__nicematrix_final_i_int=\count345
-\l__nicematrix_final_j_int=\count346
-\l__nicematrix_last_empty_row_int=\count347
-\l__nicematrix_last_empty_column_int=\count348
+\g__nicematrix_ddots_int=\count360
+\g__nicematrix_iddots_int=\count361
+\g__nicematrix_delta_x_one_dim=\dimen328
+\g__nicematrix_delta_y_one_dim=\dimen329
+\g__nicematrix_delta_x_two_dim=\dimen330
+\g__nicematrix_delta_y_two_dim=\dimen331
+\l__nicematrix_initial_i_int=\count362
+\l__nicematrix_initial_j_int=\count363
+\l__nicematrix_final_i_int=\count364
+\l__nicematrix_final_j_int=\count365
+\l__nicematrix_last_empty_row_int=\count366
+\l__nicematrix_last_empty_column_int=\count367
 
-Overfull \hbox (2.43463pt too wide) in paragraph at lines 150--166
-$[][][][][]$[][][][][] 
+Overfull \hbox (2.43463pt too wide) in paragraph at lines 133--149
+$[][][][][]$[][][][] 
  []
 
 
@@ -736,12 +884,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 16301 strings out of 473832
- 364430 string characters out of 5729482
- 762399 words of memory out of 5000000
- 39120 multiletter control sequences out of 15000+600000
- 582795 words of font info for 54 fonts, out of 8000000 for 9000
+ 23108 strings out of 473832
+ 536017 string characters out of 5729482
+ 1012547 words of memory out of 5000000
+ 45826 multiletter control sequences out of 15000+600000
+ 579479 words of font info for 52 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,10n,93p,1146b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,14n,96p,666b,1393s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on bidlayout-test.pdf (1 page).
