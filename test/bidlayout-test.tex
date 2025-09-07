@@ -6,7 +6,10 @@
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{colortbl}
-
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\makeatletter
 % (intentionally left minimal; removed older unused demo commands)
 
 % Color theme — My favorite 2
@@ -28,11 +31,22 @@
 \definecolor{GroupBGOne}{HTML}{FFDDB8}
 \definecolor{GroupBGTwo}{HTML}{FFF1BF}
 \definecolor{GroupBGThree}{HTML}{FFE4E6}
+\definecolor{NeutralBG}{HTML}{DFCBB2}
 
 \newcounter{bidGroupIndex}
 \setcounter{bidGroupIndex}{0}
 \gdef\bidGroupFillSpec{GroupBGOne}
-
+% restore rowIndex to track emitted rows for shading
+\newcounter{rowIndex}
+\setcounter{rowIndex}{0}
+\gdef\shadeCommands{}
+% No-op during accumulation
+\newcommand{\ShRight}[2]{}
+\newcommand{\AddShadeForCurrentRow}{%
+  \stepcounter{rowIndex}%
+  \xdef\shadeCommands{\shadeCommands\noexpand\ShRight{\arabic{rowIndex}}{\bidGroupFillSpec}}%
+}
+\makeatother
 % Fixed-width columns for alignment
 \newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.66\linewidth}
 \newlength{\bidRightWidth}\setlength{\bidRightWidth}{.66\linewidth}
@@ -65,15 +79,19 @@
   \else
     \def\bidLeftCell{}%
   \fi
-  {\cellcolor{\bidGroupFillSpec}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
+  % advance row and append shading command for this row
+  \AddShadeForCurrentRow
+  {\cellcolor{NeutralBG}\bidLeftCell} & {\cellcolor{NeutralBG}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
 }
 % Command to output standalone bids (bids without subbids)
 \NewDocumentCommand{\flushbid}{}{%
   \ifnum\value{bidNeed}=1\relax
+    % advance row and append shading for this pending row
+    \AddShadeForCurrentRow
     \ifx\bidDesc\empty
-      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{NeutralBG}}\\
     \else
-      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{NeutralBG}}\\
     \fi
     \setcounter{bidNeed}{0}%
   \fi
@@ -90,23 +108,37 @@
 \else
   \def\bidLeftCell{}%
 \fi
-{\cellcolor{\bidGroupFillSpec}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
+% advance row and append shading for this row
+\AddShadeForCurrentRow
+{\cellcolor{NeutralBG}\bidLeftCell} & {\cellcolor{NeutralBG}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
   \par\ttfamily\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
+  \setcounter{rowIndex}{0}\gdef\shadeCommands{}%
   \renewcommand{\arraystretch}{\BidRowStretch}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
+  \begin{NiceTabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}[corners]%
 }{%
   \ifnum\value{bidNeed}=1\relax
+    % advance row and append shading for final pending row
+    \AddShadeForCurrentRow
     \ifx\bidDesc\empty
-      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{NeutralBG}}\\
     \else
-      {\cellcolor{\bidGroupFillSpec}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
+      {\cellcolor{NeutralBG}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{NeutralBG}}\\
     \fi
   \fi
-  \end{tabular}\par\endgroup%
+  \CodeAfter
+    % Define drawer now (after table is laid out) and then execute accumulated calls
+    \renewcommand{\ShRight}[2]{%
+      \begin{tikzpicture}[overlay, remember picture]
+        \path[shade, left color=NeutralBG, right color=##2]
+          (##1-2.north west) rectangle (##1-2.south east);
+      \end{tikzpicture}%
+    }%
+    \shadeCommands
+  \end{NiceTabular}\par\endgroup%
 }
 
 % (intentionally left minimal; removed unused list/collapsible helpers)
@@ -132,6 +164,11 @@
 \bid{E}
 \subbid{E1}
 \end{bidsemi}
+
+{\par\small\ttfamily
+  \edef\ShadeDbg{\shadeCommands}%
+  \noindent Debug shadeCommands: \detokenize\expandafter{\ShadeDbg}\par
+}
 
 \end{document}
 
