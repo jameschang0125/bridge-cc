@@ -23,8 +23,9 @@
 \colorlet{subsubYColor}{Fav2SubsubY}
 
 % Fixed-width columns for alignment
-\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.40\linewidth}
-\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.60\linewidth}
+\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.66\linewidth}
+\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.66\linewidth}
+\newcommand{\BidRowStretch}{0.5}
 
 % Initialize global variables and counter
 \newcounter{bidNeed}
@@ -57,15 +58,16 @@
   {} & {\ttfamily\small \hspace*{1.2em}{\color{subsubXColor}#1}\IfValueT{#2}{{\ \texttt{\color{subsubYColor}\small #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
+  \begingroup
   \par\ttfamily\small\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.8em}}p{\bidRightWidth}@{}}%
+  \renewcommand{\arraystretch}{\BidRowStretch}%
+  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
 }{%
   \ifnum\value{bidNeed}=1\relax
-    % Output any pending bid at the end
     {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \\
   \fi
-  \end{tabular}\par%
+  \end{tabular}\par\endgroup%
 }
 
 % (intentionally left minimal; removed unused list/collapsible helpers)
@@ -79,7 +81,7 @@
 \subbid{A2}[extra]
 \subbid{A3}
 \bid{B}[desc B]
-\subbid{B1}
+\subbid{B1}[this is a very very looooooooooong extra text hahahahhahahaha]
 \subbid{B2}
 \bid{C}
 \subbid{C1}

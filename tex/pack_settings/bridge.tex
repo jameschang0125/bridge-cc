@@ -16,6 +16,7 @@
 \definecolor{Fav2SubExtra}{HTML}{23A0ED}
 \definecolor{Fav2SubsubX}{HTML}{085D53}
 \definecolor{Fav2SubsubY}{HTML}{34D399}
+\definecolor{bidBackgroundColor}{RGB}{248, 248, 246}
 \colorlet{bidLabelColor}{Fav2BidLabel}
 \colorlet{bidDescColor}{Fav2BidDesc}
 \colorlet{subbidTextColor}{Fav2SubText}
@@ -24,8 +25,8 @@
 \colorlet{subsubYColor}{Fav2SubsubY}
 
 % Fixed-width columns for alignment
-\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.40\linewidth}
-\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.60\linewidth}
+\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.60\linewidth}
+\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.40\linewidth}
 
 % Initialize global variables and counter
 \newcounter{bidNeed}
@@ -33,9 +34,16 @@
 \gdef\bidLabel{}\gdef\bidDesc{}
 
 % bidsemi: use plain "\bid{A}[desc]" and "\subbid{<text>}[extra]"
+% Command to output standalone bids (bids without subbids)
+\NewDocumentCommand{\flushbid}{}{%
+\ifnum\value{bidNeed}=1\relax
+  {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \tabularnewline
+  \setcounter{bidNeed}{0}%
+\fi
+}
 \NewDocumentCommand{\bid}{m o}{%
-  \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
-  \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
+  \setcounter{bidNeed}{1}%
+  \IfValueTF{#2}{\gdef\bidLabel{#1:}\gdef\bidDesc{#2}}{\gdef\bidLabel{#1}\gdef\bidDesc{}}%
 }
 \NewDocumentCommand{\subbid}{m o}{%
   \ifnum\value{bidNeed}=1\relax
@@ -46,25 +54,32 @@
   \fi
   \bidLeftCell & {\ttfamily\small {\color{subbidTextColor}#1}\IfValueT{#2}{{\ \texttt{\color{subbidExtraColor}\small #2}}}}\tabularnewline
 }
-% Command to output standalone bids (bids without subbids)
-\NewDocumentCommand{\flushbid}{}{%
-  \ifnum\value{bidNeed}=1\relax
-    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \tabularnewline
-    \setcounter{bidNeed}{0}%
-  \fi
-}
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
   {} & {\ttfamily\small \hspace*{1.2em}{\color{subsubXColor}#1}\IfValueT{#2}{{\ \texttt{\color{subsubYColor}\small #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
-  \par\ttfamily\small\parskip=0pt\parindent=0pt%
+  \par\vspace{0.3em}%
+  \begin{tcolorbox}[
+    colback=bidBackgroundColor,
+    colframe=gray!50,
+    boxrule=0.5pt,
+    top=0.1em,
+    bottom=0.15em,
+    left=0.4em,
+    right=0.4em,
+    boxsep=0pt,
+    arc=2pt
+  ]
+  \ttfamily\small\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.8em}}p{\bidRightWidth}@{}}%
+  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.6em}}p{\bidRightWidth}@{}}%
 }{%
   \ifnum\value{bidNeed}=1\relax
     % Output any pending bid at the end
     {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \\
   \fi
-  \end{tabular}\par%
+  \end{tabular}%
+  \end{tcolorbox}%
+  \vspace{0.3em}\par%
 }
