@@ -1,9 +1,8 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  7 SEP 2025 17:37
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.5)  7 SEP 2025 17:40
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**bidlayout-test.tex
+**bidlayout-test.tex --halt-on-error
 (./bidlayout-test.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -668,10 +667,6 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 \g__nicematrix_max_cell_width_dim=\dimen317
 \c@iRow=\count339
 \c@jCol=\count340
-\l__nicematrix_cell_box=\box70
-\l__nicematrix_the_array_box=\box71
-\l__nicematrix_left_delim_dim=\dimen318
-\l__nicematrix_right_delim_dim=\dimen319
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 50.
 
@@ -702,6 +697,10 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 150.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 150.
+\l__nicematrix_cell_box=\box70
+\l__nicematrix_the_array_box=\box71
+\l__nicematrix_left_delim_dim=\dimen318
+\l__nicematrix_right_delim_dim=\dimen319
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 152.
 
@@ -723,7 +722,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 155--155
 \l__nicematrix_last_empty_column_int=\count348
 
 Overfull \hbox (2.43463pt too wide) in paragraph at lines 150--166
-[][][][][] 
+$[][][][][]$[][][][][] 
  []
 
 
@@ -735,18 +734,14 @@ Overfull \hbox (2.43463pt too wide) in paragraph at lines 150--166
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 16248 strings out of 473832
- 362913 string characters out of 5729482
- 749502 words of memory out of 5000000
- 39067 multiletter control sequences out of 15000+600000
+ 16301 strings out of 473832
+ 364430 string characters out of 5729482
+ 762399 words of memory out of 5000000
+ 39120 multiletter control sequences out of 15000+600000
  582795 words of font info for 54 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,10n,93p,1128b,942s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,10n,93p,1146b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on bidlayout-test.pdf (1 page).
