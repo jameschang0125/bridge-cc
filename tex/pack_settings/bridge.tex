@@ -1,11 +1,12 @@
 \newcommand\bin[1]{
 \lstinputlisting[label={#1}]{#1}
 }
-
+\usepackage{xcolor}
 % trimmed unused packages
 \usepackage{xparse}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
+\usepackage{colortbl}
 
 % (intentionally left minimal; removed older unused demo commands)
 
@@ -16,70 +17,116 @@
 \definecolor{Fav2SubExtra}{HTML}{23A0ED}
 \definecolor{Fav2SubsubX}{HTML}{085D53}
 \definecolor{Fav2SubsubY}{HTML}{34D399}
-\definecolor{bidBackgroundColor}{RGB}{248, 248, 246}
 \colorlet{bidLabelColor}{Fav2BidLabel}
 \colorlet{bidDescColor}{Fav2BidDesc}
 \colorlet{subbidTextColor}{Fav2SubText}
 \colorlet{subbidExtraColor}{Fav2SubExtra}
 \colorlet{subsubXColor}{Fav2SubsubX}
 \colorlet{subsubYColor}{Fav2SubsubY}
+% removed unused GroupTint* definitions for conciseness
+
+% palette for subtle group backgrounds tuned for text colors
+\definecolor{GroupBGOne}{HTML}{FFF0E1}
+\definecolor{GroupBGTwo}{HTML}{FFF8E0}
+\definecolor{GroupBGThree}{HTML}{FFF4F4}
+
+% lighter versions for left column
+\definecolor{GroupBGOneLeft}{HTML}{FFF6EB}
+\definecolor{GroupBGTwoLeft}{HTML}{FFF8EC}
+\definecolor{GroupBGThreeLeft}{HTML}{FFF7F3}
+
+\newcounter{bidGroupIndex}
+\setcounter{bidGroupIndex}{0}
+\gdef\bidGroupFillSpec{GroupBGOne}
+\gdef\bidGroupFillSpecLeft{GroupBGOneLeft}
 
 % Fixed-width columns for alignment
-\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.60\linewidth}
-\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.40\linewidth}
+\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.66\linewidth}
+\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.66\linewidth}
+\newcommand{\BidRowStretch}{0.5}
+% removed bidRowStrut
 
 % Initialize global variables and counter
 \newcounter{bidNeed}
 \setcounter{bidNeed}{0}
 \gdef\bidLabel{}\gdef\bidDesc{}
+% (no auto-flush queue; keep logic simple and robust inside tabular)
+
+% Command to output standalone bids (bids without subbids)
+\newcommand{\flushbidemit}{%
+  \ifx\bidDesc\empty
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+  \else
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}}%
+  \fi
+  {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}}\\
+  \setcounter{bidNeed}{0}%
+}
+\newcommand{\flushbidnoop}{}
+\NewDocumentCommand{\flushbid}{}{%
+  \ifnum\value{bidNeed}=1\relax\expandafter\flushbidemit\else\expandafter\flushbidnoop\fi
+}
 
 % bidsemi: use plain "\bid{A}[desc]" and "\subbid{<text>}[extra]"
-% Command to output standalone bids (bids without subbids)
-\NewDocumentCommand{\flushbid}{}{%
-\ifnum\value{bidNeed}=1\relax
-  {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \tabularnewline
-  \setcounter{bidNeed}{0}%
-\fi
+% Original bid command (manual flushing required)
+\NewDocumentCommand{\bidmanual}{m o}{%
+  \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
+  \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
+  \stepcounter{bidGroupIndex}%
+  \ifnum\value{bidGroupIndex}>3\setcounter{bidGroupIndex}{1}\fi
+  \ifnum\value{bidGroupIndex}=1\gdef\bidGroupFillSpec{GroupBGOne}\gdef\bidGroupFillSpecLeft{GroupBGOneLeft}\fi
+  \ifnum\value{bidGroupIndex}=2\gdef\bidGroupFillSpec{GroupBGTwo}\gdef\bidGroupFillSpecLeft{GroupBGTwoLeft}\fi
+  \ifnum\value{bidGroupIndex}=3\gdef\bidGroupFillSpec{GroupBGThree}\gdef\bidGroupFillSpecLeft{GroupBGThreeLeft}\fi
 }
-\NewDocumentCommand{\bid}{m o}{%
-  \setcounter{bidNeed}{1}%
-  \IfValueTF{#2}{\gdef\bidLabel{#1:}\gdef\bidDesc{#2}}{\gdef\bidLabel{#1}\gdef\bidDesc{}}%
+
+% \bid interface: unstarred = auto-flush (old \nextbid), starred = manual (old \bid)
+\NewDocumentCommand{\bid}{s m o}{%
+  \IfBooleanTF{#1}{%
+    % starred: manual pending only
+    \bidmanual{#2}[#3]%
+  }{%
+    % unstarred: auto-flush any pending standalone first
+    \flushbid\relax
+    \bidmanual{#2}[#3]%
+  }%
 }
+% Back-compat: \nextbid now forwards to unstarred \bid
+\NewDocumentCommand{\nextbid}{m o}{\bid{#1}[#2]}
 \NewDocumentCommand{\subbid}{m o}{%
   \ifnum\value{bidNeed}=1\relax
-    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}}}%
+    \ifx\bidDesc\empty
+      \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+    \else
+      \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}}%
+    \fi
     \setcounter{bidNeed}{0}%
   \else
     \def\bidLeftCell{}%
   \fi
-  \bidLeftCell & {\ttfamily\small {\color{subbidTextColor}#1}\IfValueT{#2}{{\ \texttt{\color{subbidExtraColor}\small #2}}}}\tabularnewline
+  {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
 }
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
-  {} & {\ttfamily\small \hspace*{1.2em}{\color{subsubXColor}#1}\IfValueT{#2}{{\ \texttt{\color{subsubYColor}\small #2}}}}\tabularnewline
+\ifnum\value{bidNeed}=1\relax
+  \ifx\bidDesc\empty
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+  \else
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}}%
+  \fi
+  \setcounter{bidNeed}{0}%
+\else
+  \def\bidLeftCell{}%
+\fi
+{\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
-  \par\vspace{0.3em}%
-  \begin{tcolorbox}[
-    colback=bidBackgroundColor,
-    colframe=gray!50,
-    boxrule=0.5pt,
-    top=0.1em,
-    bottom=0.15em,
-    left=0.4em,
-    right=0.4em,
-    boxsep=0pt,
-    arc=2pt
-  ]
-  \ttfamily\small\parskip=0pt\parindent=0pt%
+  \begingroup
+  \par\ttfamily\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.6em}}p{\bidRightWidth}@{}}%
+  %
+  \renewcommand{\arraystretch}{\BidRowStretch}%
+  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
 }{%
-  \ifnum\value{bidNeed}=1\relax
-    % Output any pending bid at the end
-    {\color{bidLabelColor}\texttt{\bfseries \bidLabel}}{\texttt{\color{bidDescColor}\small\ \bidDesc}} & \\
-  \fi
-  \end{tabular}%
-  \end{tcolorbox}%
-  \vspace{0.3em}\par%
+  \flushbid
+  \end{tabular}\par\endgroup%
 }

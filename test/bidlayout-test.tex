@@ -49,9 +49,26 @@
 \newcounter{bidNeed}
 \setcounter{bidNeed}{0}
 \gdef\bidLabel{}\gdef\bidDesc{}
+% (no auto-flush queue; keep logic simple and robust inside tabular)
+
+% Command to output standalone bids (bids without subbids)
+\newcommand{\flushbidemit}{%
+  \ifx\bidDesc\empty
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}}%
+  \else
+    \def\bidLeftCell{{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}}%
+  \fi
+  {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}}\\
+  \setcounter{bidNeed}{0}%
+}
+\newcommand{\flushbidnoop}{}
+\NewDocumentCommand{\flushbid}{}{%
+  \ifnum\value{bidNeed}=1\relax\expandafter\flushbidemit\else\expandafter\flushbidnoop\fi
+}
 
 % bidsemi: use plain "\bid{A}[desc]" and "\subbid{<text>}[extra]"
-\NewDocumentCommand{\bid}{m o}{%
+% Original bid command (manual flushing required)
+\NewDocumentCommand{\bidmanual}{m o}{%
   \gdef\bidLabel{#1}\setcounter{bidNeed}{1}%
   \IfValueTF{#2}{\gdef\bidDesc{#2}}{\gdef\bidDesc{}}%
   \stepcounter{bidGroupIndex}%
@@ -60,6 +77,20 @@
   \ifnum\value{bidGroupIndex}=2\gdef\bidGroupFillSpec{GroupBGTwo}\gdef\bidGroupFillSpecLeft{GroupBGTwoLeft}\fi
   \ifnum\value{bidGroupIndex}=3\gdef\bidGroupFillSpec{GroupBGThree}\gdef\bidGroupFillSpecLeft{GroupBGThreeLeft}\fi
 }
+
+% \bid interface: unstarred = auto-flush (old \nextbid), starred = manual (old \bid)
+\NewDocumentCommand{\bid}{s m o}{%
+  \IfBooleanTF{#1}{%
+    % starred: manual pending only
+    \bidmanual{#2}[#3]%
+  }{%
+    % unstarred: auto-flush any pending standalone first
+    \flushbid\relax
+    \bidmanual{#2}[#3]%
+  }%
+}
+% Back-compat: \nextbid now forwards to unstarred \bid
+\NewDocumentCommand{\nextbid}{m o}{\bid{#1}[#2]}
 \NewDocumentCommand{\subbid}{m o}{%
   \ifnum\value{bidNeed}=1\relax
     \ifx\bidDesc\empty
@@ -72,17 +103,6 @@
     \def\bidLeftCell{}%
   \fi
   {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
-}
-% Command to output standalone bids (bids without subbids)
-\NewDocumentCommand{\flushbid}{}{%
-  \ifnum\value{bidNeed}=1\relax
-    \ifx\bidDesc\empty
-      {\cellcolor{\bidGroupFillSpecLeft}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
-    \else
-      {\cellcolor{\bidGroupFillSpecLeft}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\ \texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
-    \fi
-    \setcounter{bidNeed}{0}%
-  \fi
 }
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
@@ -102,16 +122,11 @@
   \begingroup
   \par\ttfamily\parskip=0pt\parindent=0pt%
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
+  %
   \renewcommand{\arraystretch}{\BidRowStretch}%
   \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
 }{%
-  \ifnum\value{bidNeed}=1\relax
-    \ifx\bidDesc\empty
-      {\cellcolor{\bidGroupFillSpecLeft}{\color{bidLabelColor}\texttt{\bfseries \bidLabel}}} & {\cellcolor{\bidGroupFillSpec}}\\
-    \else
-      {\cellcolor{\bidGroupFillSpecLeft}{\color{bidLabelColor}\texttt{\bfseries \bidLabel :}}{\texttt{\color{bidDescColor} \bidDesc}}} & {\cellcolor{\bidGroupFillSpec}}\\
-    \fi
-  \fi
+  \flushbid
   \end{tabular}\par\endgroup%
 }
 
@@ -137,6 +152,34 @@
 \flushbid
 \bid{E}
 \subbid{E1}
+\end{bidsemi}
+
+\section*{more realistic example}
+\begin{bidsemi}
+\bid{1m - 1M(-1)}
+\bid{2N}[17-18 bal]
+\bid{2m}[(13)14-15, good (two of AKQ) 6+m]
+\subbid{rebid}[nat F1]
+\subbid{raise \& new suit}[nat GF]
+\bid{3m}[good (two of AKQ) 6+m (could be weaker with longer m)]
+\bid{3M}[(16)17-18 bal, 4+M (16 is probably 5m4M22 and not opening 1N)]
+\bid{3N}[s solid m, to play (about 7-card 13 HCP to 6-card 18 HCP)]
+\bid{reverse}[concentrated 14-16, 6+m and 4+ suit, NF]
+\bid{jump \& jump reverse}[inv+, spl]
+\bid{double jump}[void spl (4m = 6+m, 4+fit)]
+\bid{1C - 1D - 1H \& 1D - 1H - 1S}[11-17, 4+S (18+ uses Gazilli)]
+\subbid{PLOB (4SF1)}
+\bid{1D - 1M - 2C}[11-15, 4+C]
+\bid{1C - 1DH - 1S \& 1D - 1HS - 1N}[min unbal or 16+]
+\bid{2H}[8-10 (because 1m - 2H = 3-7)]
+\subbid{+1}[8+]
+\subsubbid{then 2m/2M}[min unbal wo/w 3M]
+\subsubbid{others}[16+, GF (2N FF?)]
+\subbid{other}[min nat (jump = weak but shapely)]
+\subsubbid{new suit}[GF]
+\bid{1C - 1DH - 1N}[11-13 bal]
+\subbid{modified 2-way}
+\bid{test}[test]
 \end{bidsemi}
 
 \end{document}
