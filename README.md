@@ -1,12 +1,34 @@
-# system note generator 
+# system note generator
 
 This is the system notes used for the U26 event (2024). All rights reserved.
 
 ## usage
 
-- put your system into `tex` folder, look at the structures for example
-- run `gen.sh`, it should generate three folders: `sandbox`, `tex-book`, `tex-result` 
-- usually the `tex-result` folder contains what you need
+-   put your system into `tex` folder, look at the structures for example
+-   run `gen.sh`, it should generate three folders: `sandbox`, `tex-book`, `tex-result`
+-   usually the `tex-result` folder contains what you need
+
+### Deterministic section ordering (section_order.txt)
+
+For each chapter directory under `tex/` (e.g. `tex/opening`), you can create a file named `section_order.txt` to control the inclusion order of its subdirectories (sections):
+
+-   One section directory name per line.
+-   Lines starting with `#` are comments; blank lines are ignored.
+-   Prefix a name with `!` to exclude that section from the chapter.
+-   Any listed section that does not exist will cause an error.
+-   Sections not listed (and not excluded) are appended in alphabetical order.
+
+Example `tex/opening/section_order.txt`:
+
+```
+# explicit order first
+1m
+1M_
+1N
+!2X      # exclude this section
+
+# remaining sections are appended in sorted order
+```
 
 ## example output
 

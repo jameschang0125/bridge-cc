@@ -1,5 +1,5 @@
 from os import listdir
-from os.path import join
+from os.path import join, isdir
 from pathlib import Path
 import json
 
@@ -65,14 +65,40 @@ def _gen_main(fnames = {}, cname = "main"):
 
 
 def gen(dir = "../tex"):
-	chapters = listdir(dir)
+	chapters = sorted(listdir(dir))
 	allFnames = {}
 
 	for chapter in chapters:
 		fnames = []
-		if (chapter in IGNORE_DIR) or Path(join(dir, chapter)).is_file():
+		chapter_dir = join(dir, chapter)
+		if (chapter in IGNORE_DIR) or Path(chapter_dir).is_file():
 			continue
-		for section in listdir(join(dir, chapter)):
+		# discover sections (directories only)
+		sections = [s for s in listdir(chapter_dir) if isdir(join(chapter_dir, s))]
+		# read optional section_order.txt to control order/exclusions
+		order_path = Path(join(chapter_dir, "section_order.txt"))
+		ordered_sections = []
+		excluded = set()
+		if order_path.exists():
+			with open(order_path, "r") as f:
+				for raw in f:
+					line = raw.strip()
+					if not line or line.startswith("#"):
+						continue
+					if line.startswith("!"):
+						name = line[1:].strip()
+						if name not in sections:
+							raise ValueError(f"Unknown section in exclusion: {chapter}/{name}")
+						excluded.add(name)
+						continue
+					if line not in sections:
+						raise ValueError(f"Unknown section in order: {chapter}/{line}")
+					if line not in ordered_sections:
+						ordered_sections.append(line)
+		# append remaining sections (not ordered and not excluded), sorted for determinism
+		remaining = sorted([s for s in sections if s not in set(ordered_sections) and s not in excluded])
+		final_sections = ordered_sections + remaining
+		for section in final_sections:
 			fnames.append(join(dir, chapter, section, "main"))
 		_gen(fnames, chapter)
 		allFnames[chapter] = fnames
