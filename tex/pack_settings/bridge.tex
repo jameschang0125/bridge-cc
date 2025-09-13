@@ -11,7 +11,7 @@
 % (intentionally left minimal; removed older unused demo commands)
 
 % Color theme — My favorite 2
-\definecolor{Fav2BidLabel}{HTML}{7C3AED}
+\definecolor{Fav2BidLabel}{HTML}{5F14BA}
 \definecolor{Fav2BidDesc}{HTML}{A25DD0}
 \definecolor{Fav2SubText}{HTML}{59709C}
 \definecolor{Fav2SubExtra}{HTML}{23A0ED}
@@ -41,8 +41,8 @@
 \gdef\bidGroupFillSpecLeft{GroupBGOneLeft}
 
 % Fixed-width columns for alignment
-\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.66\linewidth}
-\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.66\linewidth}
+\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.50\textwidth}
+\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.50\textwidth}
 \newcommand{\BidRowStretch}{0.5}
 % removed bidRowStrut
 
@@ -117,15 +117,16 @@
 \else
   \def\bidLeftCell{}%
 \fi
-{\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oooo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
+{\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
   \par\ttfamily\parskip=0pt\parindent=0pt%
+  \normalsize
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
-  %
+  \emergencystretch=1em\relax
   \renewcommand{\arraystretch}{\BidRowStretch}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.0em}}p{\bidRightWidth}@{}}%
+  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.2em}}p{\bidRightWidth}@{}}%
 }{%
   \flushbid
   \end{tabular}\par\endgroup%
