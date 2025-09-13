@@ -13,10 +13,10 @@
 % Color theme — My favorite 2
 \definecolor{Fav2BidLabel}{HTML}{5F14BA}
 \definecolor{Fav2BidDesc}{HTML}{A25DD0}
-\definecolor{Fav2SubText}{HTML}{59709C}
-\definecolor{Fav2SubExtra}{HTML}{23A0ED}
-\definecolor{Fav2SubsubX}{HTML}{085D53}
-\definecolor{Fav2SubsubY}{HTML}{34D399}
+\definecolor{Fav2SubText}{HTML}{774548}
+\definecolor{Fav2SubExtra}{HTML}{A27B5D}
+\definecolor{Fav2SubsubX}{HTML}{305F75}
+\definecolor{Fav2SubsubY}{HTML}{1EA3BC}
 \colorlet{bidLabelColor}{Fav2BidLabel}
 \colorlet{bidDescColor}{Fav2BidDesc}
 \colorlet{subbidTextColor}{Fav2SubText}
@@ -41,8 +41,8 @@
 \gdef\bidGroupFillSpecLeft{GroupBGOneLeft}
 
 % Fixed-width columns for alignment
-\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.50\textwidth}
-\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.50\textwidth}
+\newlength{\bidLeftWidth}\setlength{\bidLeftWidth}{.5\textwidth}
+\newlength{\bidRightWidth}\setlength{\bidRightWidth}{.5\textwidth}
 \newcommand{\BidRowStretch}{0.5}
 % removed bidRowStrut
 
@@ -103,7 +103,7 @@
   \else
     \def\bidLeftCell{}%
   \fi
-  {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
+  {\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily {\bfseries\color{subbidTextColor}#1}\IfValueT{#2}{{\texttt{\bfseries\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor}#2}}}}\tabularnewline
 }
 % Sub-item under right column with indentation; X dark grey, Y light grey
 \NewDocumentCommand{\subsubbid}{m o}{%
@@ -117,7 +117,7 @@
 \else
   \def\bidLeftCell{}%
 \fi
-{\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\color{subbidTextColor}\phantom{oo}#1}\IfValueT{#2}{{\texttt{\color{subbidTextColor}:}\ \texttt{\color{subbidExtraColor} #2}}}}\tabularnewline
+{\cellcolor{\bidGroupFillSpecLeft}\bidLeftCell} & {\cellcolor{\bidGroupFillSpec}\ttfamily{\bfseries\color{subsubXColor}\phantom{}#1}\IfValueT{#2}{{\texttt{\bfseries\color{subsubXColor}:}\ \texttt{\color{subsubYColor} #2}}}}\tabularnewline
 }
 \newenvironment{bidsemi}{%
   \begingroup
