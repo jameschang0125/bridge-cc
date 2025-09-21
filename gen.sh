@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -r tex-tmp
+rm tex-book/*
 if test -d tex-tmp; then
 	echo "exited since tex-tmp exists"
 	exit
