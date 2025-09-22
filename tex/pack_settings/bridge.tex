@@ -7,6 +7,7 @@
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{colortbl}
+\usepackage{longtable}
 
 % (intentionally left minimal; removed older unused demo commands)
 
@@ -126,8 +127,8 @@
   \setcounter{bidNeed}{0}\gdef\bidLabel{}\gdef\bidDesc{}%
   \emergencystretch=1em\relax
   \renewcommand{\arraystretch}{\BidRowStretch}%
-  \begin{tabular}{@{}p{\bidLeftWidth}@{\hspace{0.2em}}p{\bidRightWidth}@{}}%
+  \begin{longtable}{@{}p{\bidLeftWidth}@{\hspace{0.2em}}p{\bidRightWidth}@{}}%
 }{%
   \flushbid
-  \end{tabular}\par\endgroup%
+  \end{longtable}\par\endgroup%
 }
