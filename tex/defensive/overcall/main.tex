@@ -6,11 +6,16 @@ Similar to take-out, an overcall is level-aware:
 
 \bin{\currfiledir/seq/overcall}
 
-We use Rubens when advancing an overcall:
+We use Rubens when advancing an overcall that is lower than \texttt{2m}:
 
-\input{\currfiledir/seq/basic_rubens}
+\input{\currfiledir/seq/1Y}
+\input{\currfiledir/seq/2m}
 
-(TODO) advancing a 2-level overcall and Rubens
+\subsection{sandwich position}
+
+Overcalls are natrual and Rubens is ON. However, since advancer failed to made a direct overcall, his bids are NF and shows a NFB quality.
+
+\bin{\currfiledir/seq/sandwich}
 
 \subsection{jump overcall}
 
@@ -20,3 +25,7 @@ Notice that this write-up is quite aggressive and vul-sensitive.
 
 \bin{\currfiledir/seq/jump}
 
+\subsection{other general principles}
+
+\textbf{Rubens} is a \textbf{whitelist convention}.
+It is ON iff we made an natrual overcall lower than \texttt{2m}, and LHO passes or doubled.
