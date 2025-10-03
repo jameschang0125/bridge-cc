@@ -1,0 +1,59 @@
+\section{vs artificial bids}
+
+Double is natrual (or lead-directing) unless otherwise specified.
+
+\subsection{vs transfer}
+
+A \texttt{transfer opening (preempt)} is defined as:
+
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item The bid promises one \textbf{specific} higher-ranking suit
+    \item It also counts even if have a strong variant that is not the one promised. ex: \texttt{2D = weak H or strong S+C} is a transfer opening; but \texttt{2D = weak H or weak S} is not.
+\end{itemize}
+
+Against transfer openings, since we are allowed to double almost freely, and we have four ways of showing strengths: \texttt{X then P/X}, \texttt{P then X}, and \texttt{direct cuebid}.
+However, there are some questions: first, how do we want to seperate our hands (or even the more primitive question: what hands do we want to "make a call") into these groups?
+Second, what is a reasonable assignment? \\
+To answer these questions, let's see how these calls are different:
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item X then P/X: resp are allowed to make a move after the first X, so these two hands should share a trait indicating "resp can move"
+    \item P then X: resp usually won't move before the second X unless he have t/o strength
+    \item direct cuebid: resp is forced to bid
+\end{itemize}
+
+My suggestions are:
+
+{\small\ttfamily
+\begin{NiceTabular}{ccccc}[hvlines]
+       & strength & takeout & allow penalty & penalty \\
+X -> P & weak*    & yes     &               &         \\
+X -> X & normal   & yes     & yes           &         \\
+P -> X & penalty  &         &               & yes     \\
+cue    & normal   & yes     &               &         \\
+\end{NiceTabular}}
+
+{\small\ttfamily*originally couldn't takeout, or t/o minimum. So roughly 9-12/10-13/12-15 at 1/2/3-level} \\
+
+The bidding usually goes like \texttt{(3C*) - X - (3D)} to the responder.
+He simply replies assuming the overcaller is a weaker takeout hand.
+If he passes and sees the overcaller doubles again, he would assume the overcaller is a normal takeout hand but with 2-3(4) cards in opponent's suit
+(with 0-1 cards and the same strength, he will cuebid instead), and is allowed to bid normally or pass to convert to penalty. \\
+What do we gain? First, we allow some weaker takeout hands to bid, especially when against a high-level preempt.
+Second, for normal takeout hands, instead of mixing into \texttt{(3D) - X}, we now allows a real penalty hand to penalize, and a balanced takeout hand to cooperatively penalize.
+
+\subsubsection{delayed bid}
+
+Let's just assume pass then bid is weaker for now.
+
+\subsection{vs artificial raise}
+
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item vs Drury: t/o
+    \item vs Bergen: t/o
+    \item vs splinter: suggest sacrifice
+\end{itemize}
+
+
