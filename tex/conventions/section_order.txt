@@ -1,5 +1,0 @@
-comp
-non-comp
-other
-
-

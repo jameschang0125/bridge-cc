@@ -2,23 +2,7 @@
 
 # TODO
 
-- after t/o X
-
-##
-
-ERKC
-
-# not urgent
-
-- comp in every situation individually
-
-# done
-
-Gaz後12-14改在2N
-(1M)-(2M)-2N
-
-(1X)-(1Y)-1N
-(1C)-2m
-
-After support double: 
-After support XX: P = min, system on
+- however, judgement applies: you may underbid/pass if your preempt actually helps opponents
+- hunting scheme
+- extended good bad (for resp or adv), and 2N = mixed raise
+- extended Rubens

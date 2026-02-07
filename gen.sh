@@ -21,16 +21,19 @@ for f in *.tex; do
 	echo X | time xelatex --halt-on-error $f > ../log/$f.log1
 	if (( $? )); then
 		echo error when compiling $f, exiting...
+		cat ../log/$f.log1
 		exit
 	fi
 	echo X | time xelatex --halt-on-error $f > ../log/$f.log2
 	if (( $? )); then
 		echo error when compiling $f, exiting...
+		cat ../log/$f.log2
 		exit
 	fi
 	echo X | time xelatex --halt-on-error $f > ../log/$f.log3
 	if (( $? )); then
 		echo error when compiling $f, exiting...
+		cat ../log/$f.log3
 		exit
 	fi
 done
