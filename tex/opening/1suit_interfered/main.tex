@@ -1,0 +1,87 @@
+\section{1X interfered}
+
+Unless explicitly said "subseq ON", subseq is OFF.
+
+\subsection{vs t/o}
+
+Please notice that after XX, it is a FP (to 2N) scheme so that X is PEN.
+
+\bin{\currfiledir/seq/takeout}
+
+\subsection{vs 1-level overcall}
+
+I've considered \textit{italian style}, but maybe later.
+
+\bin{\currfiledir/seq/1X_overcall}
+
+\subsection{vs 2-level overcall}
+
+\bin{\currfiledir/seq/2X_overcall}
+
+\subsection{the 2N raise}
+
+In the following situations:
+
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item partner opens or overcalls 1M (or non-jump 2M)
+    \item is then overcalled < 2N (not doubled)
+    \item (we are overcaller) the original mixed raise no longer exists. i.e. (1X) - 1M - (2X or higher)
+    \item (we are overcaller) advancer is PH so he is not possible to inv with 2N (thus jump cue = nat fit-showing)
+\end{itemize}
+
+\texttt{2N} is artificial and showing a raise. It shows:
+
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item if this is the only raise under 3M (i.e. ... 1H/2H - (2S)), it shows inv+ raise
+    \item otherwise, among 2N and cue, higher = mixed raise, lower = inv+ raise
+\end{itemize}
+
+We use the higher as mixed raise because it is semi-preemptive.
+
+\subsubsection{mixed raise}
+
+mixed raise, showing a less-then-inv constr 4+ fit. which means:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item 9-11 for overcalling
+    \item (7)8-9(10) for opening
+\end{itemize}
+
+\subsection{neg X and continuation}
+
+As above, since we used \texttt{2N} artificially, we need to put bal inv into neg X. 
+Specifically, neg X can contain:
+
+\bin{\currfiledir/seq/negX}
+
+For opener's rebid, some notes:
+
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item since there are too many non-default cases, don't jump to 4M with GF M fit unless there are no space. you should cuebid or X first.
+    \item good-bad is ON if: \texttt{1S - (2H) - X}, or after negative X vs jump overcall
+    \item otherwise, 2N shows extra and stoppers, 3X shows extra and no fit
+    \item bid under 2M is natrual and usually not GF (but does not deny extra)
+    \item 2M is default, i.e. does not promise extra length
+\end{itemize}
+
+\subsection{vs later overcalls}
+
+Here are some general notes if overcalled in later auctions:
+
+\bin{\currfiledir/seq/4_seat_general}
+
+Some specific cases:
+
+\bin{\currfiledir/seq/F1N_takeout}
+
+\subsection{TBD}
+
+just a quick note: if we are overcaller, then 
+Rubens is ON if overcalls <= 2D, and is passed. (in this case, transfer from opp's suit)
+Rubens is ON if overcalls 2m, and is doubled.
+transfer from 1N if doubled: transfer to opp's suit shows 10+ and no fit.
+either way, jump = fit-showing, about 9-11 values, jump cue = mixed raise, also 9-11 values
+All other unmentioned cases, we bid natrually for now.

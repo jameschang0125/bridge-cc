@@ -1,37 +1,41 @@
 1N -
-2C = ask 4M, may be 5S inv or Garbage
-    1N - 2C; 3H/3S/4C/4D = 5S/5H/6H/6S
-    1N - 2C; 2M - 3oM = ST  # higher = spl
-    1N - 2C; 2M - 3m = 5m, 4oM, ST or CoG
-        3oM = fit. 3M = nat 5M. om = fit m only. 4m = double fit.
-    1N - 2C; 2D - P/2H = Garbage
-    # TODO: 1N - 2C; 2X - 3C = BTUBWS ?
-2D/2H/4D/4H = transfer 2H/2S/3C/3D/4H/4S  # transfer minor promises 6+m
+2C = ask 4M, may be 5S inv or Garbage (promises 4M unless 5m ST)
+    1N - 2C - 2D - 3H/3S/4C/4D = 5S/5H/6H/6S
+    1N - 2C - 2M - 3oM = ST  # higher = spl
+    1N - 2C - 2M - 3m = 5m, ST
+        [M = H] 3H = 5H. 3S = nat 4S. if available, 3D = fit and ST (then 3N = FF)
+        [M = S] 3S = 5S. 3H = fit ST. if available, 3D = nat 5-card
+    1N - 2C - 2D - P/2H = Garbage
+2D/2H/4D/4H = transfer 2H/2S/4H/4S  # transfer minor promises 6+m
     super accept after 2DH: 3M = 5+M, suit = Ax/Kx, 2N = others
         then 3M-1 = re-transfer
-    ... 2S - 3H = 55+M, inv NF
-    ... 2M - 3m = 4+m GF
-        3M = fit. 3D/oM = fit m only. 4m = double fit.
+    ... 2S - 3H = 55+M, inv. NF.
+    ... 2M - 3m = 4+m GF  # may be CoG so don't bid over 3N
+        3M = fit. 3oM = fit m. if available, 3D = nat 5-card. 4m = double fit (then 2RKC).
     ... 2S - 2N = GF, bal CoG or ST
-    ... 2M - 4X = spl
+    ... 2H - 3S = spl or ST  # then 3N = waste in S
+    ... 2M - 4X = spl  # 5-5 GF -> Smolen
     ... 2H - 2S = 5H4S, inv NF
 2S = transfer 3C
     2N = accept 6+C inv. 3C = decline.
-        P/3C = s/o. suit = GF nat 4+.
+        P/3C = s/o. suit = spl.
         ... 2N - 3N = s/o. ... 3C - 3N = CoG or mild ST
 2N = nat inv
 3C = transfer 3D. s/o or GF
+    ... 3D - 3N = CoG or mild ST. suit = spl.
 3D = nat inv NF
 3M = GF, spl M, 54+m
     oM = good oM. 3N = s/o. 4m = preference.
 3N = s/o
-4C = 55+M GF  # TODO: 55 CoG => Smolen
+4C = 55+M GF  # Since 55 CoG => Smolen, this is SI
     4M = min.
     4D = max.
         4H = s/o, pick one. 4N = 2RKC. 4S = ?
-4S = ?  # maybe 65+m ST
+4S = maybe 65+m ST
+    4N = s/o
 4N = quant
+    if max: 5X = 4-card (if 5-card, bid again), 5X = 6-card
 5m = s/o
+5N = inv 7X
 
-# TODO: after minor transfer: bid short
-# TODO: 4M6m into Stayman ?
+# if we want puppet Stay, then bal inv -> 2C (NOT NOW)
