@@ -6,7 +6,9 @@ To tackle those artificial bids' problem, we need classify them into:
     \setlength\itemsep{0pt}
     \item transfers: promising only 1 known (5+ cards) suit
     \item multi: promise 1 unknown suit
-    \item assumed-fit: promises 0 or 2+ suits: take-out, Micheals, unusual, fertilizer, etc.    
+    \item assumed-fit: promises 0 or 2+ suits: take-out, Micheals, unusual, fertilizer, etc. 
+    \item art fit
+    \item multi-way bids that is not above 
 \end{itemize}
 
 Situations can also be classified into:
@@ -17,7 +19,7 @@ Situations can also be classified into:
     \item we opened and are overcalled (since in this case partner has promised some strength)
 \end{itemize}
 
-\subsection{advancer's suit and NT bids}
+\subsection{principles}
 
 General principles are:
 
@@ -26,15 +28,59 @@ General principles are:
     \item advances are generally natrual if it's not opponents suit
     \item opponents 5+ card suit usually treated as cuebid (meaning might vary)
     \item if we opened NT, then transfer Leb applied
-    \item P then bid shows a weaker hand
+    \item P then bid shows a weaker hand. but P then X may vary.
+    \item however, if we already have other methods, then use it (ex: supp X)
 \end{itemize}
 
-\subsection{principles}
+\subsection{vs transfers}
 
-\bin{\currfiledir/seq/main}
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item X = t/o and may be lighter than usual  (X then X: slightly stronger than usual)
+    \item P then X = PEN if partner opened or they preempted. otherwise still t/o.
+    \item P then bid = often lighter
+    \item direct cuebid = same as original (usually: Micheals, or fit)
+    \item others = same as original
+\end{itemize}
+
+Here are some common situations:
+
+\bin{\currfiledir/seq/transfer}
+
+\subsection{vs assumed-fit \& unusual}
+
+We need to talk about penalty scheme first. When partner opens and opp uses multi or assumed-fit bids:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item P then X = inv+, flat (bal) hand. partner can choose to defend or bid natrually
+    \item X then P/X = PEN in at least one suit. usually sharper so subseq P implies t/o (opener's X is coop)
+\end{itemize}
+
+If they t/o or does not promises a 5-card suit, then we simply use system on, or natrual, or otherwise specified. (note: please check our defense to t/o)
+Otherwise, we use unusual-vs-unusual:
 
 \bin{\currfiledir/seq/UvU}
 
-\subsection{other things that have not covered}
+Here are some common situations:
+
+\bin{\currfiledir/seq/afit}
+
+\subsection{vs assumed-fit pres}
+
+If they open preempt, we might need more case-by-case analysis.
+
+\bin{\currfiledir/seq/afit_pre}
+
+\subsection{vs multi}
+
+Multi is hard to defend.
+
+\bin{\currfiledir/seq/multi}
+
+\subsection{vs art fit}
+
+\bin{\currfiledir/seq/art_fit}
+
+\subsection{vs other \& multi-way bids}
 
 \bin{\currfiledir/seq/other}
