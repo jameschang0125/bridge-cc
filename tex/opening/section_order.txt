@@ -1,6 +1,4 @@
-general
 1suit
-1suit_interfered
 1N
 2C
 2N
