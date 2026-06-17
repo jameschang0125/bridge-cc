@@ -1,5 +1,10 @@
+\lstdefinelanguage{BridgeSeq}{
+  morecomment=[l]\#,
+  moredelim=**[il][\bfseries\color{ListingEmph}]{!},
+  moredelim=**[il][\color{ListingLineEmph}]{^},
+}
 \newcommand\bin[1]{
-\lstinputlisting[label={#1}]{#1}
+\lstinputlisting[language=BridgeSeq,label={#1}]{#1}
 }
 \usepackage{xcolor}
 % trimmed unused packages
@@ -30,10 +35,6 @@
 % Short helpers for colored emphasis inside listings via <@ ... @>.
 \NewDocumentCommand{\bb}{O{ListingEmph} m}{\textbf{\textcolor{#1}{#2}}}
 \NewDocumentCommand{\br}{m}{\bb[red]{#1}}
-\lstset{
-  moredelim=**[il][\bfseries\color{ListingEmph}]{!},
-  moredelim=**[il][\color{ListingLineEmph}]{^}
-}
 
 % palette for subtle group backgrounds tuned for text colors
 \definecolor{GroupBGOne}{HTML}{FFF0E1}

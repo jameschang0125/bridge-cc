@@ -16,42 +16,33 @@ However, 6+S inv will bid 1S initially, then rebid 2S (3S) regardless of opener'
 
 \subsection{Gazzilli}
 
-Before introducing opener's rebids, let's introduce Gazzilli, which uses \texttt{1H - 1SN - 2C \& 1S - 1N - 2C} to show 16+ (possibly with weak variant) hands. \\
-For response: limit raise, \texttt{1H - 1S; 2C - 2S = 6+S inv}, and \texttt{1S - 1N; 2C - 3H = 1-S, 6+H inv} are still unaffected.
-Otherwise, \texttt{2D} is art F that showing 8+ (GF against 16); while other bids are weak (7-) and natrual. (2N = pick-a-minor) \\
-\texttt{\normalsize\color{brown} Quick tip for weak hand: usually bid 2M with 2+M (or even 1M if no good suit) since it is good opp 6M and not-too-bad opp strong 5M.}
-
-
-For our minor opening, we can also employ Gazzilli thanks to transfer response \& unbal 1D saving space!
-Specifically, \texttt{1C - 1DH - 1S \& 1D - 1M - 1N} are empty.
-Notice that these are very suitable for Gazzilli, since it is a two-under bid for 2m. 
-Therefore, we similarly define it to be either 16+ or weak unbal (i.e. the natrual 1m - 1M - 2m).
-Responses are similar:
+Before introducing opener's rebids, let's introduce (our) Gazzilli, which uses 
+\texttt{1C - 1DH - 1S}, \texttt{1D - 1HS - 1N}, \texttt{1H - 1SN - 2C}, \texttt{1S - 1N - 2C} as a relay. showing either
 
 \begin{itemize}
     \setlength\itemsep{0pt}
-    \item \texttt{+1 = art, 8+} (except the following) and others are nat and weak (2N = pick-a-minor)
-    \item since \texttt{1m - 2H = 3-7 reverse Flannery}, \texttt{1D - 1S - 1N - 2H \& 1C - 1H - 1S - 2H} shows 8-10, 5S4H+
-    \item others = (absolute) s/o
+    \item a standard rebid of {1C, 1D, 1H, or 1S}.
+    \item 16+
 \end{itemize}
+
+Responding to it is simple: \texttt{+1 = 8+}, {\color{blue} except:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item limit raise: \texttt{1M - 1SN; 2C - 3M}
+    \item 8-10 5S4H: \texttt{1m - 1S; Gaz - 2H}
+    \item oM invite: \texttt{1H - 1S; 2C - 2S} and \texttt{1S - 1N; 2C - 3H}
+\end{itemize}}
+otherwise, bid is weak and s/o (2N = pick a minor); and {\color{blue} jump is nat ST}. We'll revisit the opener's rebid later.
 
 \subsection{1m - 1M}
 
-In brief:
-\begin{itemize}
-    \setlength\itemsep{0pt}
-    \item 4+M fit $\to$ always show first. (note: the only fit we won't show first round is GF fit after \texttt{1H - 1N*})
-    \item \texttt{1m - 1M - 2m = 13-15, good 6m, 0-3M}
-    \item \texttt{1m - 1M - 3m = 15-17, good 6m, 0-2M} (3M is a special case: Gaz first)
-    \item all other unbal goes to Gaz, then ...
-    \item if Gazzilli accepted (\texttt{... Gaz - +1}), back to 2m and 2M are nat min NF. (2M = 3M fit)
-    \item if Gazzilli accepted (\texttt{... Gaz - +1}), boring 16+ hands just simply use \textit{the waiting bid}. otherwise, other bids usually shows shape and slam interest.
-    \item if Gazzilli not accepted and 2M available, back to 2M shows 15-17, good 6m-3M. (ex: \texttt{1C - 1D; 1S - 2D; 2H}) jump 3M = GF, good 6m-3M.
-    \item if Gazzilli not accepted and resp back to 2M, raise 3M or 2N = inv
-    \item if Gazzilli not accepted, 3m is always 6+m and GF
-\end{itemize}
+\bin{\currfiledir/seq/1m-1M-simple}
+\bin{\currfiledir/seq/1m-1M-fit}
 
-\bin{\currfiledir/seq/1m-1M}
+The following design may seems asymmetric, but with a reason: if resp already choose to s/o, there's no need for min unbal to even bid.
+In this case, the more severe problem is 15-17 6m3M, one of natrual's nightmare.
+However, it's not the case when resp is 8+ and unlimited (since 15-17 6m is already GF), where you might want to show your 3-fit for min bal.
+\bin{\currfiledir/seq/1m-1M-Gaz}
 
 \subsection{1m - 1N \& 1C - 1S}
 \bin{\currfiledir/seq/1m-1SN}
@@ -87,7 +78,7 @@ After Gaz accepted and opener is 16+, GF has established. Therefore, the main pr
 
 Doesn't this look like 2-over-1? Therefore, I proposed a simple method: 
 exchange the lowest new suit with \texttt{2N}, showing a waiting hand, and after that, the responder can freely bids natrually at the two level or \texttt{2N} as a waiting bid.
-Similar to 2/1, direct 3X by opener or resp shows extra shape and strength.
+Similar to 2/1, direct 3X by opener or resp shows extra shape and strength. (caveat: if \texttt{2N} points to some major suit, opener usually shows that. However, if it points to diamonds, I think it promises extra shape or strength.)
 
 \bin{\currfiledir/seq/Gaz_waiting}
 
