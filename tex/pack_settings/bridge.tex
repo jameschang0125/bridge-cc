@@ -1,5 +1,10 @@
+\lstdefinelanguage{BridgeSeq}{
+  morecomment=[l]\#,
+  moredelim=**[il][\bfseries\color{ListingEmph}]{!},
+  moredelim=**[il][\color{ListingLineEmph}]{^},
+}
 \newcommand\bin[1]{
-\lstinputlisting[label={#1}]{#1}
+\lstinputlisting[language=BridgeSeq,label={#1}]{#1}
 }
 \usepackage{xcolor}
 % trimmed unused packages
@@ -17,6 +22,8 @@
 \definecolor{Fav2SubExtra}{HTML}{A27B5D}
 \definecolor{Fav2SubsubX}{HTML}{305F75}
 \definecolor{Fav2SubsubY}{HTML}{1EA3BC}
+\definecolor{ListingEmph}{HTML}{000FFF}
+\definecolor{ListingLineEmph}{HTML}{0A4BA1}
 \colorlet{bidLabelColor}{Fav2BidLabel}
 \colorlet{bidDescColor}{Fav2BidDesc}
 \colorlet{subbidTextColor}{Fav2SubText}
@@ -24,6 +31,10 @@
 \colorlet{subsubXColor}{Fav2SubsubX}
 \colorlet{subsubYColor}{Fav2SubsubY}
 % removed unused GroupTint* definitions for conciseness
+
+% Short helpers for colored emphasis inside listings via <@ ... @>.
+\NewDocumentCommand{\bb}{O{ListingEmph} m}{\textbf{\textcolor{#1}{#2}}}
+\NewDocumentCommand{\br}{m}{\bb[red]{#1}}
 
 % palette for subtle group backgrounds tuned for text colors
 \definecolor{GroupBGOne}{HTML}{FFF0E1}
